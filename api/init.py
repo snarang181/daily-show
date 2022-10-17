@@ -25,7 +25,10 @@ def verification():
     args = request.args
     print(args.get('hub.challenge'))
     print(args.get('hub.verify_token'))
-    print(os.getenv('hub.mode'))
+    return {
+                    'statusCode': 200,
+                    'body': args.get('hub.challenge')
+                }
     # data = request.get_json()
     # print(request.GET.get('hub.mode'))
     # print(request.GET.get('hub.challenge'))
