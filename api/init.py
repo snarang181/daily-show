@@ -27,7 +27,8 @@ def verification():
         challenge = args.get('hub.challenge')
         mode = args.get('hub.mode')
         token = args.get('hub.verify_token')
-        if (mode == 'subscribe' and token == os.getenv('meta_token')):
+        if (mode == 'subscribe' and token == 'whatsapp_daily_show'):
+            print('Verification successful')
             return {
                     'statusCode': 200,
                     'body': challenge
