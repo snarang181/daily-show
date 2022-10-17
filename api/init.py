@@ -18,7 +18,7 @@ def landing():
     return {'message': 'Hello, World! This is a private API used by the DailyShow WhatsappBot.'}, 200
 
 
-@app.route('/callback', methods=['POST'])
+@app.route('/callback', methods=['GET'])
 def meta_callback():
     data = request.get_json()
     return {'message' : data}, 200
