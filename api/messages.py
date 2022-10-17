@@ -7,7 +7,7 @@ load_dotenv()
 meta_auth_token = 'Bearer ' + os.environ.get('meta_api_token')
 
 def format_cmd_msg(name): 
-    cmd = 'Hi ' + name + '! Here are the commands you can use: \n\n'
+    cmd = 'Hi ' + name + '! Here are the commands you can use: \n'
     cmd = cmd + '\t \u2022 /help - Get a list of commands \n'
     cmd = cmd + '\t \u2022 /joke - Read a joke \n'
     cmd = cmd + '\t \u2022 /price - Get latest prices \n'
