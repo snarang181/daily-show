@@ -21,4 +21,5 @@ def landing():
 @app.route('/callback', methods=['GET'])
 def meta_callback():
     data = request.get_json()
+    print(data)
     return {'message' : data}, 200
