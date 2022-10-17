@@ -29,10 +29,7 @@ def verification():
         token = args.get('hub.verify_token')
         if (mode == 'subscribe' and token == 'whatsapp_daily_show'):
             print('Verification successful')
-            return {
-                    'statusCode': 200,
-                    'body': challenge
-                }
+            return challenge
         else:
             return {
                 'statusCode': 403,
