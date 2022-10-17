@@ -9,6 +9,7 @@ meta_auth_token = 'Bearer ' + os.environ.get('meta_api_token')
 
 
 def decide_response(phone_num, phone_num_id, message, name):
+    message = message.lower()
     if 'help' in message:
         send_cmd_msg(phone_num, phone_num_id, name)
     elif 'joke' in message:
