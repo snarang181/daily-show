@@ -22,8 +22,8 @@ def landing():
 
 @app.route('/callback', methods = ['POST','GET'])
 def receive_msg():
-    print('Message received')
     data = request.get_json()
+    print(data)
     init_arr = data['entry'][0]['changes']
     phone_num_id = init_arr[0]['value']['metadata']['phone_number_id']
     phone_num = init_arr[0]['value']['messages'][0]['from']
