@@ -22,37 +22,25 @@ def landing():
 @app.route('/callback', methods=['GET'])
 def verification():
     print('Verification is called')
-    args = request.args
-    print(args.get('hub.challenge'))
-    print(args.get('hub.verify_token'))
-    return {
+    try: 
+        args = request.args
+        challenge = args.get('hub.challenge')
+        mode = args.get('hub.mode')
+        token = args.get('hub.verify_token')
+        if (mode == 'subscribe' and token == os.getenv('meta_token')):
+            return {
                     'statusCode': 200,
-                    'body': args.get('hub.challenge')
+                    'body': challenge
                 }
-    # data = request.get_json()
-    # print(request.GET.get('hub.mode'))
-    # print(request.GET.get('hub.challenge'))
-    # print(request.GET.get('hub.verify_token'))
-    # return request.GET.get('hub.challenge'), 200
-
-    # try:
-    #     mode = event['queryStringParameters']['hub.mode']
-    #     challenge = event['queryStringParameters']['hub.challenge']
-    #     token = event['queryStringParameters']['hub.verify_token']
-    #     if(mode == 'subscribe' and token == 'manmeet@sammy'):
-    #             return {
-    #                 'statusCode': 200,
-    #                 'body': challenge
-    #             }
-    #     else:
-    #         return {
-    #             'statusCode': 403,
-    #             'body': challenge
-    #         }
-    # except Exception as e:
-    #     print('Faced exception')
-    #     print(str(e))
-    #     return {
-    #                 'statusCode': 403,
-    #                 'body':"lol"
-    #             }
+        else:
+            return {
+                'statusCode': 403,
+                'body': challenge
+            }
+    except Exception as e:
+        print('Faced exception')
+        print(str(e))
+        return {
+                    'statusCode': 403,
+                    'body':"lol"
+                }
