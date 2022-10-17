@@ -22,7 +22,11 @@ def landing():
 def verification():
     print('Verification is called')
     data = request.get_json()
-    print(data)
+    print(request.GET.get('hub.mode'))
+    print(request.GET.get('hub.challenge'))
+    print(request.GET.get('hub.verify_token'))
+    return request.GET.get('hub.challenge'), 200
+
     # try:
     #     mode = event['queryStringParameters']['hub.mode']
     #     challenge = event['queryStringParameters']['hub.challenge']
