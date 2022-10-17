@@ -23,6 +23,8 @@ def landing():
 @app.route('/callback', methods = ['POST','GET'])
 def receive_msg():
     print('Message received')
+    data = request.get_json()
+    print(data)
     return {'statusCode' : 200}
 
 # @app.route('/callback', methods=['GET'])
