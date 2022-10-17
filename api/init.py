@@ -25,7 +25,7 @@ def receive_msg():
     print('Message received')
     print(request.get_json())
     print(request.args)
-    return 200
+    return {'statusCode' : 200}
 
 # @app.route('/callback', methods=['GET'])
 # def verification():
