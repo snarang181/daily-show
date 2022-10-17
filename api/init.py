@@ -29,6 +29,7 @@ def receive_msg():
     phone_num = init_arr[0]['value']['messages'][0]['from']
     name = init_arr[0]['value']['contacts'][0]['profile']['name']
     user_msg = init_arr[0]['value']['messages'][0]['text']['body']
+    print(phone_num_id, phone_num, name, user_msg) 
     decide_response(phone_num, phone_num_id, user_msg, name)
     return {'statusCode' : 200}
 
