@@ -4,6 +4,7 @@ from flask_cors import CORS
 from flask_mail import Mail, Message
 import os, requests, json
 from dotenv import load_dotenv
+from urllib.parse import urlparse, parse_qs
 
 
 
@@ -21,11 +22,15 @@ def landing():
 @app.route('/callback', methods=['GET'])
 def verification():
     print('Verification is called')
-    data = request.get_json()
-    print(request.GET.get('hub.mode'))
-    print(request.GET.get('hub.challenge'))
-    print(request.GET.get('hub.verify_token'))
-    return request.GET.get('hub.challenge'), 200
+    args = request.args
+    print(args.get('hub.challenge'))
+    print(args.get('hub.verify_token'))
+    print(os.getenv('hub.mode'))
+    # data = request.get_json()
+    # print(request.GET.get('hub.mode'))
+    # print(request.GET.get('hub.challenge'))
+    # print(request.GET.get('hub.verify_token'))
+    # return request.GET.get('hub.challenge'), 200
 
     # try:
     #     mode = event['queryStringParameters']['hub.mode']
