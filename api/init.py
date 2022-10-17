@@ -19,7 +19,26 @@ def landing():
 
 
 @app.route('/callback', methods=['GET'])
-def meta_callback():
-    data = request.get_json()
-    print(data)
-    return {'message' : data}, 200
+def verification(event, context):
+    print('Verification is called')
+    try:
+        mode = event['queryStringParameters']['hub.mode']
+        challenge = event['queryStringParameters']['hub.challenge']
+        token = event['queryStringParameters']['hub.verify_token']
+        if(mode == 'subscribe' and token == 'manmeet@sammy'):
+                return {
+                    'statusCode': 200,
+                    'body': challenge
+                }
+        else:
+            return {
+                'statusCode': 403,
+                'body': challenge
+            }
+    except Exception as e:
+        print('Faced exception')
+        print(str(e))
+        return {
+                    'statusCode': 403,
+                    'body':"lol"
+                }
