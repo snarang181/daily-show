@@ -13,6 +13,7 @@ load_dotenv()
 app = Flask(__name__)
 
 
+
 @app.route('/', methods=['GET'])
 def landing():
     data = request.get_json()
@@ -24,7 +25,7 @@ def receive_msg():
     print('Message received')
     print(request.get_json())
     print(request.args)
-
+    return 200
 
 # @app.route('/callback', methods=['GET'])
 # def verification():
