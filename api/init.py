@@ -21,6 +21,7 @@ def landing():
 @app.route('/callback', methods=['GET'])
 def verification(event, context):
     print('Verification is called')
+    
     try:
         mode = event['queryStringParameters']['hub.mode']
         challenge = event['queryStringParameters']['hub.challenge']
