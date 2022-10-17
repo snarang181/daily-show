@@ -19,26 +19,33 @@ def landing():
     return {'message': 'Hello, World! This is a private API used by the DailyShow WhatsappBot.'}, 200
 
 
-@app.route('/callback', methods=['GET'])
-def verification():
-    print('Verification is called')
-    try: 
-        args = request.args
-        challenge = args.get('hub.challenge')
-        mode = args.get('hub.mode')
-        token = args.get('hub.verify_token')
-        if (mode == 'subscribe' and token == 'whatsapp_daily_show'):
-            print('Verification successful')
-            return challenge
-        else:
-            return {
-                'statusCode': 403,
-                'body': challenge
-            }
-    except Exception as e:
-        print('Faced exception')
-        print(str(e))
-        return {
-                    'statusCode': 403,
-                    'body':"lol"
-                }
+@app.route('/callback', methods = ['POST','GET'])
+def receive_msg():
+    print('Message received')
+    print(request.get_json())
+    print(request.args)
+
+
+# @app.route('/callback', methods=['GET'])
+# def verification():
+#     print('Verification is called')
+#     try: 
+#         args = request.args
+#         challenge = args.get('hub.challenge')
+#         mode = args.get('hub.mode')
+#         token = args.get('hub.verify_token')
+#         if (mode == 'subscribe' and token == 'whatsapp_daily_show'):
+#             print('Verification successful')
+#             return challenge
+#         else:
+#             return {
+#                 'statusCode': 403,
+#                 'body': challenge
+#             }
+#     except Exception as e:
+#         print('Faced exception')
+#         print(str(e))
+#         return {
+#                     'statusCode': 403,
+#                     'body':"lol"
+#                 }
