@@ -2,9 +2,19 @@ import requests
 import json
 from dotenv import load_dotenv
 import os
+from api.joke_generate import get_rand_joke
 
 load_dotenv()
 meta_auth_token = 'Bearer ' + os.environ.get('meta_api_token')
+
+
+def decide_response(phone_num, phone_num_id, message, name):
+    if 'help' in message:
+        send_cmd_msg(phone_num, phone_num_id, name)
+    elif 'joke' in message:
+        send_joke(phone_num, phone_num_id, name)
+    else: 
+        send_message(phone_num, phone_num_id, 'Hello ' + name + '! You said: ' + message, name)
 
 def format_cmd_msg(name): 
     cmd = 'Hi ' + name + '! Here are the commands you can use: \n'
@@ -19,6 +29,11 @@ def send_cmd_msg(phone_num, phone_num_id, name):
     msg = format_cmd_msg(name)
     send_message(phone_num, phone_num_id, msg, name)
     return 
+
+def send_joke(phone_num, phone_num_id, name):
+    joke = get_rand_joke()
+    send_message(phone_num, phone_num_id, joke, name)
+    return
 
 
 def send_message(phone_num, phone_num_id, message, name):
