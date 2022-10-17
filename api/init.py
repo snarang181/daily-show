@@ -6,7 +6,7 @@ from flask_mail import Mail, Message
 import os, requests, json
 from dotenv import load_dotenv
 from urllib.parse import urlparse, parse_qs
-from api.messages import send_message
+from api.messages import send_cmd_msg, send_message
 
 
 load_dotenv()
@@ -29,7 +29,10 @@ def receive_msg():
     phone_num = init_arr[0]['value']['messages'][0]['from']
     name = init_arr[0]['value']['contacts'][0]['profile']['name']
     user_msg = init_arr[0]['value']['messages'][0]['text']['body']
-    send_message(phone_num, phone_num_id, 'Hello ' + name + '! You said: ' + user_msg)
+    if 'help' in user_msg:
+        send_cmd_msg(phone_num, phone_num_id, name)
+    else:    
+        send_message(phone_num, phone_num_id, 'Hello ' + name + '! You said: ' + user_msg, name)
     return {'statusCode' : 200}
 
 # @app.route('/callback', methods=['GET'])
