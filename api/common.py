@@ -20,9 +20,17 @@ def format_cmd_msg(name : str) -> str:
     """
     cmd = 'Hi ' + name + '! Here are the commands you can use: \n'
     cmd = cmd + '\u2022 help - Get a list of commands \n'
+    cmd = cmd + '\u2022 weather <city_name> - Get weather report \n'
     cmd = cmd + '\u2022 joke - Read a joke \n'
     cmd = cmd + '\u2022 price - Get latest prices \n'
-    cmd = cmd + '\u2022 weather <city_name> - Get weather report \n'
+    cmd = cmd + '\u2022 news - Get latest news \n'
+    cmd = cmd + '\u2022 song - Get a song recommendation \n'
+    cmd = cmd + '\u2022 movie - Get a movie recommendation \n'
+    cmd = cmd + '\u2022 book - Get a book recommendation \n'
+    cmd = cmd + '\u2022 google <search_query> - Search on Google \n'
+    cmd = cmd + '\u2022 wiki <search_query> - Search on Wikipedia \n'
+    cmd = cmd + '\u2022 youtube <search_query> - Search on YouTube \n'
+    cmd = cmd + '\u2022 covid - Get latest covid stats \n'
     return cmd
 
 def format_weather_message(city_name : str) -> str:
