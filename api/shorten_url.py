@@ -1,5 +1,6 @@
 import pyshorteners
 
+
 def shorten_url(url : str) -> str:
     """_summary_ : This function shortens the url.
 

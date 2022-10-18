@@ -1,7 +1,7 @@
 import requests
 import json
 
-from shorten_url import shorten_url
+from api.shorten_url import shorten_url
 
 def get_news_api() -> tuple:
     """_summary_ : This function gets the news from the news API.
