@@ -69,7 +69,7 @@ def format_weather_message(city_name : str) -> str:
     weather_str = weather_str + '\u2022Wind speed: ' + str(weather_dict['wind_speed']) + ' km/h\n'
     return weather_str
 
-def format_movie_msg() -> str:
+def format_movie_message() -> str:
     """_summary_ : This function formats the movie message to be sent to the user.
     Args : None
     Returns:
