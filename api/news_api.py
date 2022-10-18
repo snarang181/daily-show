@@ -23,7 +23,7 @@ def get_news_api() -> tuple:
     response_arr = response.json()['value'] if response.status_code == 200 else []
     if response_arr == []:
         return [], 404
-    return (response_arr[:3] if len(response_arr) > 3 else response_arr), 200
+    return (response_arr[:5] if len(response_arr) > 5 else response_arr), 200
 
 def get_news() -> tuple:
     """_summary_ : This function formats the news.
