@@ -20,7 +20,7 @@ def convert_city_to_lat_long(city_name : str) -> dict:
     api_incoming_data = r.json()
     if len(api_incoming_data) == 0:
         return {"lat" : 0, "lon" : 0}, 404
-    return {'lat' : api_incoming_data[0]['lat'], 'lon' : api_incoming_data[0]['lon']}, 200
+    return {'lat' : api_incoming_data[0]['lat'], 'lon' : api_incoming_data[0]['lon'],'city_name' : api_incoming_data[0]['name']}, 200
 
 def get_weather_data(lat : float, lon : float) -> dict:
     """_summary_ : This function gets the weather data of a city.
@@ -36,6 +36,7 @@ def get_weather_data(lat : float, lon : float) -> dict:
     url = 'https://api.openweathermap.org/data/2.5/weather?lat={}&lon={}&appid={}&units={}'.format(lat,lon,weather_api_key,'metric')
     r = requests.get(url, headers = {'Content-Type': 'application/json'})
     weather_data = r.json()
+    
     return {'current_temp' : round(float(weather_data['main']['temp'])), 'feels_like' : round(float(weather_data['main']['feels_like'])), 'min_temp' : round(float(weather_data['main']['temp_min'])), 'max_temp' : round(float(weather_data['main']['temp_max'])), 'humidity' : weather_data['main']['humidity'], 'wind_speed' : round(float(weather_data['wind']['speed']) * 3.6),'weather_desc' : weather_data['weather'][0]['description']}
 
 def higher_level_weather_return(city_name : str) -> dict:
@@ -52,7 +53,9 @@ def higher_level_weather_return(city_name : str) -> dict:
         return {'current_temp' : 0, 'feels_like' : 0, 'min_temp' : 0, 'max_temp' : 0, 'humidity' : 0, 'wind_speed' : 0,'weather_desc' : 'City not found'}, 404
     lat_long = lat_long_tuple[0]
     weather_data = get_weather_data(lat_long['lat'], lat_long['lon'])
+    weather_data['city_name'] = lat_long['city_name']
     return weather_data, 200
+
 
 
 
