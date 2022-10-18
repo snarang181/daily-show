@@ -1,4 +1,3 @@
-from numpy import short
 import requests
 import json
 
@@ -37,7 +36,7 @@ def get_news() -> tuple:
         return {}, 404
     news_dict = {}
     for news in news_tuple[0]:
-        news_dict[news['query']['text']] = shorten_url(news['newsSearchUrl'])
+        news_dict[news['query']['text']] = news['newsSearchUrl']
     return news_dict, 200
 
 
