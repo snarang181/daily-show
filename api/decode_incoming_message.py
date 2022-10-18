@@ -18,12 +18,8 @@ def decipher_incoming_msg(json_incoming_data : dict) -> None:
         phone_num = init_arr[0]['value']['messages'][0]['from']
         name = init_arr[0]['value']['contacts'][0]['profile']['name']
         user_msg = init_arr[0]['value']['messages'][0]['text']['body']
-        print('phone_num_id is ', phone_num_id)
-        print('phone_num is ', phone_num)
-        print('name is ', name)
-        print('user_msg is ', user_msg)
         decide_response(phone_num, phone_num_id, user_msg, name)
     except Exception as e:
-        print('Faced exception')
+        print('Repeated messages incoming')
     return None
     
