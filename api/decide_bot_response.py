@@ -1,4 +1,4 @@
-from api.messages import send_all_commands_message, send_joke, send_weather_message, send_news_message
+from api.messages import send_all_commands_message, send_joke, send_movie_message, send_weather_message, send_news_message
 from api.common import send_message_meta_api_call
 
 def decide_response(phone_num : str, phone_num_id : str , message : str, name : str) -> None:
@@ -23,7 +23,8 @@ def decide_response(phone_num : str, phone_num_id : str , message : str, name : 
     elif 'news' in message.lower():
         send_message_meta_api_call(phone_num, phone_num_id, 'Processing the latest news for you ' + name, name)
         send_news_message(phone_num, phone_num_id, name)
-        
+    elif 'movie' in message.lower():
+        send_movie_message(phone_num, phone_num_id, name)
     else: 
         #Echo the message back to the user
         send_message_meta_api_call(phone_num, phone_num_id, 'Hello ' + name + '! You said: ' + message, name)

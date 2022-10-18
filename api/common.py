@@ -8,8 +8,7 @@ load_dotenv()
 
 from api.weather_api import higher_level_weather_return
 from api.news_api import get_news
-
-
+from api.random_movie import return_random_movie
 
 def format_cmd_msg(name : str) -> str: 
     """_summary_ : This function formats the message that contains all the commands that the user can use to interact with the bot.
@@ -69,6 +68,28 @@ def format_weather_message(city_name : str) -> str:
     weather_str = weather_str + "\u2022Today's low: " + str(weather_dict['min_temp']) + '°C\n'
     weather_str = weather_str + '\u2022Wind speed: ' + str(weather_dict['wind_speed']) + ' km/h\n'
     return weather_str
+
+def format_movie_msg() -> str:
+    """_summary_ : This function formats the movie message to be sent to the user.
+    Args : None
+    Returns:
+        str: The formatted movie message.
+    """
+    random_movie_dict = return_random_movie()
+    movie_str = 'Here is a movie recommendation for you: \n'
+    movie_str =  movie_str + '\u2022Title: ' + random_movie_dict['title'] + ' (' + random_movie_dict['year'] + ') \n'
+    genre_arr = random_movie_dict['genres']
+    if len(genre_arr) == 1:
+        movie_str = movie_str + '\u2022Genre: ' + genre_arr[0] 
+    else:
+        genre_str = ''
+        for g in genre_arr:
+            g = g.strip()
+            genre_str = genre_str + g + ', '
+        genre_str = genre_str[:-2]
+        movie_str = movie_str + '\u2022Genres: ' + genre_str 
+    return movie_str
+
 
 
 def send_message_meta_api_call(phone_num : str , phone_num_id : str , message : str, name : str) -> None:

@@ -3,7 +3,7 @@ import json
 from dotenv import load_dotenv
 import os
 from api.joke_generate import get_rand_joke
-from api.common import format_cmd_msg, send_message_meta_api_call, format_weather_message, format_news_message
+from api.common import format_cmd_msg, send_message_meta_api_call, format_weather_message, format_news_message, format_movie_message
 
 
 
@@ -55,6 +55,20 @@ def send_weather_message(phone_num : str, phone_num_id : str,  name : str, city_
     send_message_meta_api_call(phone_num, phone_num_id, weather_message, name)
     return None
 
+def send_movie_message(phone_num : str, phone_num_id : str, name : str) -> None:
+    """_summary_ : This is a higher-level function, which sends a movie message to the user.
+
+    Args:
+        phone_num (str): The phone number of the user.
+        phone_num_id (str): The phone number ID of the user.
+        name (str): The name of the user.
+
+    Returns:
+        _type_: None
+    """
+    movie_message = format_movie_message()
+    send_message_meta_api_call(phone_num, phone_num_id, movie_message, name)
+    return None
 
 def send_joke(phone_num : str, phone_num_id : str, name : str) -> None:
     """_summary_ : This is a higher-level function, which sends a joke to the user.
