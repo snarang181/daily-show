@@ -22,7 +22,7 @@ def format_cmd_msg(name : str) -> str:
     cmd = cmd + '\u2022 help - Get a list of commands \n'
     cmd = cmd + '\u2022 weather <city_name> - Get weather report \n'
     cmd = cmd + '\u2022 joke - Read a joke \n'
-    cmd = cmd + '\u2022 price - Get latest prices \n'
+    cmd = cmd + '\u2022 price - Get latest prices of your favourite assets \n'
     cmd = cmd + '\u2022 news - Get latest news \n'
     cmd = cmd + '\u2022 song - Get a song recommendation \n'
     cmd = cmd + '\u2022 movie - Get a movie recommendation \n'
