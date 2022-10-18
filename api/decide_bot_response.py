@@ -11,11 +11,9 @@ def decide_response(phone_num : str, phone_num_id : str , message : str, name : 
         message (str): The message received from the user.
         name (str): The name of the user.
     """
-    if 'help' in message:
-        message = message.lower()
+    if 'help' in message.lower():
         send_all_commands_message(phone_num, phone_num_id, name)
-    elif 'joke' in message:
-        message = message.lower()
+    elif 'joke' in message.lower():
         send_joke(phone_num, phone_num_id, name)
     else: 
         send_message_meta_api_call(phone_num, phone_num_id, 'Hello ' + name + '! You said: ' + message, name)

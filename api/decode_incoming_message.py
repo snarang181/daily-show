@@ -13,7 +13,6 @@ def decipher_incoming_msg(json_incoming_data : dict) -> None:
         _type_: None
     """
     try:
-        print(json_incoming_data)
         init_arr = json_incoming_data['entry'][0]['changes']
         phone_num_id = init_arr[0]['value']['metadata']['phone_number_id']
         phone_num = init_arr[0]['value']['messages'][0]['from']
