@@ -12,16 +12,18 @@ def decipher_incoming_msg(json_incoming_data : dict) -> None:
     Returns:
         _type_: None
     """
-    print('data is ', json_incoming_data)
-    init_arr = json_incoming_data['entry'][0]['changes']
-    phone_num_id = init_arr[0]['value']['metadata']['phone_number_id']
-    phone_num = init_arr[0]['value']['messages'][0]['from']
-    name = init_arr[0]['value']['contacts'][0]['profile']['name']
-    user_msg = init_arr[0]['value']['messages'][0]['text']['body']
-    print('phone_num_id is ', phone_num_id)
-    print('phone_num is ', phone_num)
-    print('name is ', name)
-    print('user_msg is ', user_msg)
-    decide_response(phone_num, phone_num_id, user_msg, name)
+    try:
+        init_arr = json_incoming_data['entry'][0]['changes']
+        phone_num_id = init_arr[0]['value']['metadata']['phone_number_id']
+        phone_num = init_arr[0]['value']['messages'][0]['from']
+        name = init_arr[0]['value']['contacts'][0]['profile']['name']
+        user_msg = init_arr[0]['value']['messages'][0]['text']['body']
+        print('phone_num_id is ', phone_num_id)
+        print('phone_num is ', phone_num)
+        print('name is ', name)
+        print('user_msg is ', user_msg)
+        decide_response(phone_num, phone_num_id, user_msg, name)
+    except Exception as e:
+        print('Faced exception')
     return None
     
