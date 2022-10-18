@@ -7,6 +7,8 @@ import os
 load_dotenv()
 
 from api.weather_api import higher_level_weather_return
+from api.news_api import get_news
+
 
 
 def format_cmd_msg(name : str) -> str: 
@@ -22,16 +24,30 @@ def format_cmd_msg(name : str) -> str:
     cmd = cmd + '\u2022 help - Get a list of commands \n'
     cmd = cmd + '\u2022 weather <city_name> - Get weather report \n'
     cmd = cmd + '\u2022 joke - Read a joke \n'
-    cmd = cmd + '\u2022 price - Get latest prices of your favourite assets \n'
     cmd = cmd + '\u2022 news - Get latest news \n'
-    cmd = cmd + '\u2022 song - Get a song recommendation \n'
+    cmd = cmd + '\u2022 price - Get latest prices of your favourite assets \n'
     cmd = cmd + '\u2022 movie - Get a movie recommendation \n'
-    cmd = cmd + '\u2022 book - Get a book recommendation \n'
     cmd = cmd + '\u2022 google <search_query> - Search on Google \n'
     cmd = cmd + '\u2022 wiki <search_query> - Search on Wikipedia \n'
     cmd = cmd + '\u2022 youtube <search_query> - Search on YouTube \n'
     cmd = cmd + '\u2022 covid - Get latest covid stats \n'
     return cmd
+
+def format_news_message() -> str:
+    """_summary_ : This function formats the news message to be sent to the user.
+
+    Returns:
+        str: The formatted news message.
+    """
+    news_tuple = get_news()
+    if news_tuple[1] == 404:
+        return 'No news found. Please try again.'
+    news_dict = news_tuple[0]
+    news_str = 'Here are the latest news: \n'
+    for k,v in news_dict.items():
+        #Show key : value, key is headline and value is url
+        news_str = news_str + '\u2022' + k + ' : ' + v + '\n'
+    return news_str
 
 def format_weather_message(city_name : str) -> str:
     """_summary_ : This is a higher-level function, which formats the weather report, to be sent to the user.
