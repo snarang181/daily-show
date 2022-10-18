@@ -6,7 +6,7 @@ from flask_mail import Mail, Message
 import os, requests, json
 from dotenv import load_dotenv
 from urllib.parse import urlparse, parse_qs
-from api.messages import decide_response
+from api.decode_incoming_message import decipher_incoming_msg
 
 
 load_dotenv()
@@ -14,28 +14,42 @@ load_dotenv()
 app = Flask(__name__)
 
 
+
+
 @app.route('/', methods=['GET'])
 def landing():
+    """ 
+    This is the landing page for the app.
+    Args: None
+    Returns:
+        render_template: The landing page for the app.
+    """
     data = request.get_json()
     return {'message': 'Hello, World! This is a private API used by the DailyShow WhatsappBot.'}, 200
 
 
 @app.route('/callback', methods = ['POST','GET'])
-def receive_msg():
+def receive_msg_endpoint():
+    """_summary_: This is the endpoint that receives the incoming messages from the Whatsapp API.
+    Args: None
+    Returns:
+        {dict}: Returns a statusCode 200 to signify that the message was received.
+    """
     data = request.get_json()
-    print(data)
-    init_arr = data['entry'][0]['changes']
-    phone_num_id = init_arr[0]['value']['metadata']['phone_number_id']
-    phone_num = init_arr[0]['value']['messages'][0]['from']
-    name = init_arr[0]['value']['contacts'][0]['profile']['name']
-    user_msg = init_arr[0]['value']['messages'][0]['text']['body']
-    print(phone_num_id, phone_num, name, user_msg) 
-    decide_response(phone_num, phone_num_id, user_msg, name)
-    return {'statusCode' : 200}
+    decipher_incoming_msg(data)
+    return {'statusCode' : 200} 
+
+
+
+
+
+
+
+#############  NOTE  #############
+############# CALLBACK URL INITIAL API AUTH ######
 
 # @app.route('/callback', methods=['GET'])
 # def verification():
-#     print('Verification is called')
 #     try: 
 #         args = request.args
 #         challenge = args.get('hub.challenge')
