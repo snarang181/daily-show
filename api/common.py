@@ -19,10 +19,10 @@ def format_cmd_msg(name : str) -> str:
         str: The formatted message, containing all commands.
     """
     cmd = 'Hi ' + name + '! Here are the commands you can use: \n'
-    cmd = cmd + '\t \u2022 help - Get a list of commands \n'
-    cmd = cmd + '\t \u2022 joke - Read a joke \n'
-    cmd = cmd + '\t \u2022 price - Get latest prices \n'
-    cmd = cmd + '\t \u2022 weather <city_name> - Get weather report \n'
+    cmd = cmd + '\u2022 help - Get a list of commands \n'
+    cmd = cmd + '\u2022 joke - Read a joke \n'
+    cmd = cmd + '\u2022 price - Get latest prices \n'
+    cmd = cmd + '\u2022 weather <city_name> - Get weather report \n'
     return cmd
 
 def format_weather_message(city_name : str) -> str:
