@@ -17,6 +17,8 @@ def decide_response(phone_num : str, phone_num_id : str , message : str, name : 
     elif 'weather' in message.lower():
         city_name = message.lower().replace('weather', '')
         city_name = city_name.strip()
+        if city_name == '':
+            send_message_meta_api_call(phone_num, phone_num_id, 'Please enter the city name.', name)
         send_weather_message(phone_num, phone_num_id, name, city_name)
     else: 
         #Echo the message back to the user
