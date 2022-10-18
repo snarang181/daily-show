@@ -36,7 +36,7 @@ def format_weather_message(city_name : str) -> str:
     """
     weather_tuple = higher_level_weather_return(city_name.lower())
     if weather_tuple[1] == 404:
-        return 'City not found'
+        return 'City not found. Please try again.'
     weather_dict = weather_tuple[0]
     weather_str = 'Weather report for ' + weather_dict['city_name'] + ':\n'
     weather_str = weather_str + '\u2022Curent temperature: ' + str(weather_dict['current_temp']) + '°C\n'
