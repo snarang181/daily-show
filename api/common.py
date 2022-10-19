@@ -26,13 +26,13 @@ def format_cmd_msg(name : str) -> str:
     cmd = cmd + '\u2022 help - Get a list of commands \n'
     cmd = cmd + '\u2022 price <stock_name> - Get latest prices of your favourite assets \n'
     cmd = cmd + '\u2022 weather <city_name> - Get weather report \n'
+    cmd = cmd + '\u2022 covid <country_name> - Get latest covid stats for a country or worldwide  \n'
     cmd = cmd + '\u2022 news - Get latest news \n'
     cmd = cmd + '\u2022 movie - Get a movie recommendation \n'
     cmd = cmd + '\u2022 joke - Read a joke \n'
     cmd = cmd + '\u2022 google <search_query> - Search on Google \n'
     cmd = cmd + '\u2022 wiki <search_query> - Search on Wikipedia \n'
     cmd = cmd + '\u2022 youtube <search_query> - Search on YouTube \n'
-    cmd = cmd + '\u2022 covid - Get latest covid stats \n'
     return cmd
 
 def format_stocks_message(stock_name : str) -> str: 
@@ -75,7 +75,7 @@ def format_covid_message(country_name : str) -> str:
         if covid_tuple[1] == 404:
             return 'Data not found for {}. Please try again.'.format(country_name)
         covid_dict = covid_tuple[0]
-        covid_str = 'Here are the latest covid stats for {}: \n'.format(country_name.title())
+        covid_str = 'Here are the latest covid stats for {}: \n'.format(country_name)
     covid_str = covid_str + '\u2022Total cases: ' + str(covid_dict['confirmed']) + '\n'
     covid_str = covid_str + '\u2022Total deaths: ' + str(covid_dict['deaths']) + '\n'
     return covid_str
