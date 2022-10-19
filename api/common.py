@@ -9,6 +9,7 @@ load_dotenv()
 from api.weather_api import higher_level_weather_return
 from api.news_api import get_news
 from api.random_movie import return_random_movie
+from api.stocks import higher_level_get_stock_details
 
 def format_cmd_msg(name : str) -> str: 
     """_summary_ : This function formats the message that contains all the commands that the user can use to interact with the bot.
@@ -31,6 +32,24 @@ def format_cmd_msg(name : str) -> str:
     cmd = cmd + '\u2022 youtube <search_query> - Search on YouTube \n'
     cmd = cmd + '\u2022 covid - Get latest covid stats \n'
     return cmd
+
+def format_stocks_message(stock_name : str) -> str: 
+    """_summary_ : This function formats the stock info message to be sent to the user
+
+    Args:
+        stock_name (str): The name of the stock
+
+    Returns:
+        str: The formatted stock message
+    """
+    stock_dict = higher_level_get_stock_details(stock_name)
+    if stock_dict == {}:
+        return 'Stock not found. Please try again.'
+    stock_str = 'Here is the latest info for ' + stock_name.title() + ':\n'
+    stock_str = stock_str + '\u2022Current price: ' + str(stock_dict['curr_price']) + '\n'
+    stock_str = stock_str + '\u2022Previous Close: ' + str(stock_dict['prev_close']) + '\n'
+    stock_str = stock_str + '\u2022Latest Trading Date: ' + str(stock_dict['latest_trading_day']) + '\n'
+    return stock_str
 
 def format_news_message() -> str:
     """_summary_ : This function formats the news message to be sent to the user.
