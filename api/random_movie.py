@@ -7,7 +7,7 @@ def return_random_movie() -> dict:
     Returns:
         dict: The movie details.
     """
-    with open('./api/movies.json') as f:
+    with open('./api/dataset/movies.json') as f:
         movies = json.load(f)
     return random.choice(movies)
 
