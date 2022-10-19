@@ -73,7 +73,7 @@ def format_covid_message(country_name : str) -> str:
     else:
         covid_tuple = get_covid_stats(country_name)
         if covid_tuple[1] == 404:
-            return 'Data not found for {}. Please try again.'.format(country_name)
+            return 'Data not found for {}. Please try again.'.format(country_name.upper())
         covid_dict = covid_tuple[0]
         covid_str = 'Here are the latest covid stats for {}: \n'.format(country_name)
     covid_str = covid_str + '\u2022Total cases: ' + str(covid_dict['confirmed']) + '\n'
