@@ -1,4 +1,4 @@
-from api.messages import send_all_commands_message, send_joke, send_movie_message, send_weather_message, send_news_message, send_stocks_message
+from api.messages import send_all_commands_message, send_covid_message, send_joke, send_movie_message, send_weather_message, send_news_message, send_stocks_message,send_covid_message
 from api.common import send_message_meta_api_call
 
 def decide_response(phone_num : str, phone_num_id : str , message : str, name : str) -> None:
@@ -33,6 +33,10 @@ def decide_response(phone_num : str, phone_num_id : str , message : str, name : 
             send_message_meta_api_call(phone_num, phone_num_id, 'Please enter the stock name.', name)
         else: 
             send_stocks_message(phone_num, phone_num_id, name, stock_name)
+    elif 'covid' in message.lower():
+        covid_name = message.lower().replace('covid', '')
+        covid_name = covid_name.strip()
+        send_covid_message(phone_num, phone_num_id, name, covid_name)
     else: 
         #Echo the message back to the user
         send_message_meta_api_call(phone_num, phone_num_id, 'Hello ' + name + '! You said: ' + message, name)

@@ -1,3 +1,4 @@
+from numpy import cov
 import requests
 import json
 
@@ -10,6 +11,7 @@ from api.weather_api import higher_level_weather_return
 from api.news_api import get_news
 from api.random_movie import return_random_movie
 from api.stocks import higher_level_get_stock_details
+from api.covid_api import get_covid_stats
 
 def format_cmd_msg(name : str) -> str: 
     """_summary_ : This function formats the message that contains all the commands that the user can use to interact with the bot.
@@ -51,6 +53,34 @@ def format_stocks_message(stock_name : str) -> str:
     stock_str = stock_str + '\u2022Latest Trading Date: ' + str(stock_dict['latest_trading_day']) + '\n'
     return stock_str
 
+def format_covid_message(country_name : str) -> str:
+    """_summary_ : This function formats the covid message to be sent to the user.
+
+    Args:
+        country_name (str): The name of the country.
+
+    Returns:
+        str: The formatted covid message.
+    """
+    covid_str = ''
+    covid_dict = {}
+    if country_name == '':
+        covid_tuple = get_covid_stats(country_name)
+        if covid_tuple[1] == 404:
+            return 'Data not found. Please try again.'
+        covid_dict = covid_tuple[0]
+        covid_str = 'Here are the latest covid stats worldwide: \n'
+    else:
+        covid_tuple = get_covid_stats(country_name)
+        if covid_tuple[1] == 404:
+            return 'Data not found for {}. Please try again.'.format(country_name)
+        covid_dict = covid_tuple[0]
+        covid_str = 'Here are the latest covid stats for {}: \n'.format(country_name.title())
+    covid_str = covid_str + '\u2022Total cases: ' + str(covid_dict['confirmed']) + '\n'
+    covid_str = covid_str + '\u2022Total deaths: ' + str(covid_dict['deaths']) + '\n'
+    return covid_str
+        
+        
 def format_news_message() -> str:
     """_summary_ : This function formats the news message to be sent to the user.
 

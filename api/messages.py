@@ -3,7 +3,7 @@ import json
 from dotenv import load_dotenv
 import os
 from api.joke_generate import get_rand_joke
-from api.common import format_cmd_msg, send_message_meta_api_call, format_weather_message, format_news_message, format_movie_message, format_stocks_message
+from api.common import format_cmd_msg, send_message_meta_api_call, format_weather_message, format_news_message, format_movie_message, format_stocks_message, format_covid_message
 
 
 
@@ -35,6 +35,21 @@ def send_stocks_message(phone_num : str, phone_num_id : str, name : str, stock_n
     """
     stock_message = format_stocks_message(stock_name)
     send_message_meta_api_call(phone_num, phone_num_id, stock_message, name)
+    
+def send_covid_message(phone_num : str, phone_num_id : str, name : str, country_name : str) -> None:
+    """_summary_ : This is a higher-level function, which sends a covid message to the user.
+
+    Args:
+        phone_num (str): The phone number of the user.
+        phone_num_id (str): The phone number ID of the user.
+        name (str): The name of the user.
+
+    Returns:
+        _type_: None
+    """
+    covid_message = format_covid_message(country_name)
+    send_message_meta_api_call(phone_num, phone_num_id, covid_message, name)
+    return None
 
 def send_news_message(phone_num : str , phone_num_id : str, name : str) -> None:
     """_summary_ : This is a higher-level function, which sends a news message to the user.
