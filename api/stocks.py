@@ -22,6 +22,9 @@ def get_stock_info_from_name(stock_name : str) -> tuple :
     if len(r.json()) == 0:
         return {}, 404
     return r.json()[0], 200
+
+
+
  
 def get_exact_keys_for_stock_info(quote_dict : dict) -> tuple:
     """_summary_ : Get the required keys from the quote dict obtained by api, tailored for personal application
